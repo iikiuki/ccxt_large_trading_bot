@@ -4,9 +4,12 @@ import math
 import dontshareconfig 
 
 # Configuration
-SYMBOL = 'ENA/USDT'
-symbol_2= 'ENA'
-# Adjust the BTC amount to buy
+
+amount _of_change = input("please enter the amount of change like {0.01}: ")
+float(amount _of_change) 
+
+
+
 
 
 # Initialize the Phemex exchange with your credentials
@@ -16,6 +19,21 @@ exchange = ccxt.phemex({
     'enableRateLimit': True,
 })
 stoptime=60
+try: 
+    entersymbol = input("please: enter the symbol like {USDT}: ")
+    
+    exchange.fetch_ticker(entersymbol) 
+except:
+    print("error please inter the symbol again")
+    entersymbol = input("please: enter the symbol like {USDT}: ")
+    str(entersymbol)
+          
+SYMBOL = f'{entersymbol}/USDT'
+symbol_2= f'{entersymbol}'
+# Adjust the BTC amount to buy
+
+
+
 
 
 # Function to fetch the current price for the specified symbol
@@ -93,13 +111,13 @@ while True :
                 print(f"initial_price: {initial_price}")
                 price_list.append(current_price)
                 print(f"max num    :{max(price_list)}")
-                sell_price_maby = max(price_list)-(0.001*max(price_list))
+                sell_price_maby = max(price_list)-(amount _of_change*max(price_list))
                 print(f"sell price :{sell_price_maby} \n")
                 # print(exchange.fetch_free_balance())
 
                 # print(f"{initial_price}\n")
                 # if price_drop >= PRICE_DROP_THRESHOLD:
-                if current_price < max(price_list)-(0.015*max(price_list))  : # or current_price < initial_price:   #+(initial_price*0.001)  :
+                if current_price < max(price_list)-(amount _of_change*max(price_list))  : # or current_price < initial_price:   #+(initial_price*0.001)  :
                     # Sell if the price has dropped by 0.01% or more
                     print(f"Price drop detected, \"\"selling...\"\"")
                     # place_market_order(SYMBOL, 'sell', int(AMOUNT_TO_BUY))
